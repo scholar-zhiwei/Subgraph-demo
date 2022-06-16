@@ -1,27 +1,32 @@
-specVersion: 0.0.2
-description: Gravatar for Ethereum
-repository: https://github.com/xilibi2003/gameplayer
+specVersion: 0.0.1
 schema:
   file: ./schema.graphql
 dataSources:
-  - kind: ethereum/contract
-    name: Gravity
+  - kind: ethereum
+    name: Contract
     network: ropsten
     source:
-      address: '0x8CfDDbD441Fc6ffE3c02244a6B93EF9e89FaFA4D'
-      abi: Gravity
+      //合约地址
+      address: "0xE4D908721920F5C7F00f6a5bcE4BeAA281ae09c5"
+      abi: GravatarRegistry
+      startBlock: 12403078
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.4
+      apiVersion: 0.0.5
       language: wasm/assemblyscript
+      //事件名称
       entities:
-        - Gravatar
+        - NewGravatar
+        - UpdatedGravatar
+      //abi所在目录
       abis:
-        - name: Gravity
-          file: ./abis/Gravity.json
+        - name: Contract
+          file: ./abis/Contract.json
+      //事件
       eventHandlers:
         - event: NewGravatar(uint256,address,string,string)
           handler: handleNewGravatar
         - event: UpdatedGravatar(uint256,address,string,string)
           handler: handleUpdatedGravatar
-      file: ./src/mapping.ts
+      //事件所对应的映射的目录（将事件数据存入实体中）
+      file: ./src/contract.ts
