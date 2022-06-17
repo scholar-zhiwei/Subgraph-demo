@@ -1,7 +1,7 @@
 //定义实体
 type ExampleEntity @entity {
   id: ID!
-  count: BigInt!
-  id: BigInt! # uint256
   owner: Bytes! # address
+  diaplayName: string!
+  imageUrl: string!
 }
