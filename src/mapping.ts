@@ -8,7 +8,7 @@ import { ExampleEntity } from "../generated/schema"
 
 export function handleNewGravatar(event: NewGravatar): void {
   //验证是否以event.params.id.toHex()为id的实体
-  let entity = ExampleEntity.load(event.params.id.toHex())
+  let entity = new ExampleEntity(event.params.id.toHex())
   entity.owner = event.params.owner
   entity.displayName = event.params.dispalyName
   entity.imageUrl = event.params.imageUrl
@@ -49,7 +49,7 @@ export function handleUpdatedGravatar(event: UpdatedGravatar): void {
 
   //有则更新owner displayName imageUrl等数据
   entity.owner = event.params.owner
-  entity.displayName = event.params.dispalyName
+  entity.displayName = event.params.displayName
   entity.imageUrl = event.params.imageUrl
 
   // 保存实体
