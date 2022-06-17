@@ -8,24 +8,10 @@ import { ExampleEntity } from "../generated/schema"
 
 export function handleNewGravatar(event: NewGravatar): void {
   //验证是否以event.transaction.from.toHex()为id的实体
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
-
-  // Entities only exist after they have been saved to the store;
-  // `null` checks allow to create entities on demand
-  if (!entity) {
-    //没有 则创建
-    entity = new ExampleEntity(event.transaction.from.toHex())
-
-    //设置格式
-    entity.count = BigInt.fromI32(0)
-  }
-
-  //有则更新count id owner等数据
-  entity.count = entity.count + BigInt.fromI32(1)
-
-  // Entity fields can be set based on event parameters
-  entity.id = event.params.id
+  let entity = ExampleEntity.load(event.params.id.toHex())
   entity.owner = event.params.owner
+  entity.displayName = event.params.dispalyName
+  entity.imageUrl = event.params.imageUrl
 
   // 保存实体
   entity.save()
@@ -51,24 +37,20 @@ export function handleNewGravatar(event: NewGravatar): void {
 }
 
 export function handleUpdatedGravatar(event: UpdatedGravatar): void {
-   //验证是否以event.transaction.from.toHex()为id的实体
-  let entity = ExampleEntity.load(event.transaction.from.toHex())
+   //验证是否以event.params.id.toHex()为id的实体
+  let entity = ExampleEntity.load(event.params.id.toHex())
 
   // Entities only exist after they have been saved to the store;
   // `null` checks allow to create entities on demand
   if (!entity) {
     //没有 则创建
-    entity = new ExampleEntity(event.transaction.from.toHex())
-    //设置格式
-    entity.count = BigInt.fromI32(0)
+    entity = new ExampleEntity(event.params.id.toHex())
   }
 
-  //有则更新count id owner等数据
-  entity.count = entity.count + BigInt.fromI32(1)
-
-  // Entity fields can be set based on event parameters
-  entity.id = event.params.id
+  //有则更新owner displayName imageUrl等数据
   entity.owner = event.params.owner
+  entity.displayName = event.params.dispalyName
+  entity.imageUrl = event.params.imageUrl
 
   // 保存实体
   entity.save()
