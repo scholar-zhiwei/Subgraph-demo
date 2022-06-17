@@ -7,7 +7,7 @@ import {
 import { ExampleEntity } from "../generated/schema"
 
 export function handleNewGravatar(event: NewGravatar): void {
-  //验证是否以event.transaction.from.toHex()为id的实体
+  //验证是否以event.params.id.toHex()为id的实体
   let entity = ExampleEntity.load(event.params.id.toHex())
   entity.owner = event.params.owner
   entity.displayName = event.params.dispalyName
