@@ -9,6 +9,7 @@ dataSources:
       //合约地址
       address: "0xE4D908721920F5C7F00f6a5bcE4BeAA281ae09c5"
       abi: GravatarRegistry
+      //需要自己增加startBlock
       startBlock: 12403078
     mapping:
       kind: ethereum/events
