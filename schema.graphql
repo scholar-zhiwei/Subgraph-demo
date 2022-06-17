@@ -2,6 +2,6 @@
 type ExampleEntity @entity {
   id: ID!
   owner: Bytes! # address
-  diaplayName: string!
-  imageUrl: string!
+  diaplayName: String!
+  imageUrl: tring!
 }
