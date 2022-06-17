@@ -3,5 +3,5 @@ type ExampleEntity @entity {
   id: ID!
   owner: Bytes! # address
   diaplayName: String!
-  imageUrl: tring!
+  imageUrl: String!
 }
